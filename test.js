@@ -84,7 +84,6 @@ function doTest (err, label, tests) {
   var testWarnings = [];
   var test;
   var i;
-  var e;
 
   if (err instanceof Error) {
     log ('error', label);
