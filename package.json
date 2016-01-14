@@ -1,0 +1,22 @@
+{
+  "name": "pastecapi",
+  "version": "0.1.0",
+  "description": "Lightweight Pastec image recognition API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "httpreq": "^0.4"
+  },
+  "keywords": [
+    "pastec",
+    "ocr",
+    "image",
+    "detection",
+    "recognition",
+    "api"
+  ],
+  "author": "Franklin van de Meent <https://frankl.in> (fr@nkl.in)",
+  "license": "Unlicense"
+}
