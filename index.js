@@ -36,7 +36,7 @@ function talk (options, callback) {
   options.headers ['User-Agent'] = 'pastecapi node/' + process.versions.node;
 
   httpreq.doRequest (options, function (err, res) {
-    var data = res && res.body || {};
+    var data = res && res.body || '';
     var error = null;
 
     if (err) {
