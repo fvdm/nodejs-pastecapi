@@ -166,6 +166,10 @@ function searchIndex (image, callback) {
   // Binary pass through
   if (image instanceof Buffer) {
     options.body = image;
+    options.headers = {
+      'Content-Length': image.length,
+      'Content-Type': 'image/jpeg'
+    };
     talk (options, callback);
     return;
   }
@@ -227,6 +231,10 @@ function addImage (image, imageId, callback) {
   // Binary pass through
   if (image instanceof Buffer) {
     options.body = image;
+    options.headers = {
+      'Content-Length': image.length,
+      'Content-Type': 'image/jpeg'
+    };
     talk (options, callback);
     return;
   }
