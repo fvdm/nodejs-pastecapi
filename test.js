@@ -132,14 +132,14 @@ function doTest (err, label, tests) {
     }
 
     if (testErrors.length) {
-      testErrors.forEach (function (test) {
-        log ('fail', ' └ ' + test.label + ': \'' + test.result + '\' is not \'' + test.expect + '\'');
+      testErrors.forEach (function (testpart) {
+        log ('fail', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
       });
     }
 
     if (testWarnings.length) {
-      testWarnings.forEach (function (test) {
-        log ('warn', ' └ ' + test.label + ': \'' + test.result + '\' is not \'' + test.expect + '\'');
+      testWarnings.forEach (function (testpart) {
+        log ('warn', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
       });
     }
   }
