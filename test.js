@@ -107,19 +107,19 @@ function doTest (err, label, tests) {
             testErrors.push (test);
             errors++;
           }
-        break;
+          break;
 
         case 'warn':
           if (test.result !== test.expect) {
             testWarnings.push (test);
             warnings++;
           }
-        break;
+          break;
 
         case 'info':
         default:
           log ('info', test.label + ' - ' + test.result);
-        break;
+          break;
       }
     }
 
