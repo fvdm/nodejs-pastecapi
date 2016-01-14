@@ -68,6 +68,7 @@ function talk (options, callback) {
 /**
  * Test API access
  *
+ * @callback callback
  * @param {function} callback - Process result
  * @returns {void}
  */
@@ -110,6 +111,7 @@ function loadIndex (indexPath, callback) {
 /**
  * Write index to file on server
  *
+ * @callback callback
  * @param {string} indexPath - Path of .dat file on server
  * @param {function} callback - Process result
  * @returns {void}
@@ -132,6 +134,7 @@ function writeIndex (indexPath, callback) {
 /**
  * Clear index on server
  *
+ * @callback callback
  * @param {function} callback - Process result
  * @returns {void}
  */
@@ -152,6 +155,7 @@ function clearIndex (callback) {
 /**
  * Match image against index
  *
+ * @callback callback
  * @param {string} image - Buffer or local path to image
  * @param {function} callback - Process result
  * @returns {void}
@@ -192,6 +196,7 @@ function searchIndex (image, callback) {
 /**
  * Remove image signature from index
  *
+ * @callback callback
  * @param {number} imageId - Index ID of image signature
  * @param {function} callback - Process result
  * @returns {void}
@@ -210,6 +215,7 @@ function deleteImage (imageId, callback) {
 /**
  * Add image signature to index
  *
+ * @callback callback
  * @param {string} image - Buffer or local path to image
  * @param {number} imageId - Index ID for image
  * @param {function} callback - Process result
