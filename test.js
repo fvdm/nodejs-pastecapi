@@ -17,7 +17,7 @@ var app = require (dir) (
   process.env.PASTEC_TIMEOUT || 5000
 );
 
-var colors = process.env.PASTEC_COLORS || 'bright';
+var colors = process.env.PASTEC_COLORS || 'dark';
 var errors = 0;
 var warnings = 0;
 var queue = [];
