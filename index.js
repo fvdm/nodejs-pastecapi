@@ -1,3 +1,12 @@
+/*
+Name:         pastecapi
+Description:  Lightweight module for Pastec image recognition API
+Author:       Franklin van de Meent (https://frankl.in)
+Source code:  https://github.com/fvdm/nodejs-pastecapi
+Feedback:     https://github.com/fvdm/nodejs-pastecapi/issues
+License:      Unlicense (Public Domain, see LICENSE file)
+*/
+
 var httpreq = require ('httpreq');
 var fs = require ('fs');
 
@@ -56,6 +65,13 @@ function talk (options, callback) {
 }
 
 
+/**
+ * Test API access
+ *
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
+
 function ping (callback) {
   var options = {
     method: 'POST',
@@ -67,6 +83,15 @@ function ping (callback) {
 
   talk (options, callback);
 }
+
+
+/**
+ * Load index from file on server
+ *
+ * @param {string} indexPath - Path to .dat file on server
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
 
 function loadIndex (indexPath, callback) {
   var options = {
@@ -81,6 +106,15 @@ function loadIndex (indexPath, callback) {
   talk (options, callback);
 }
 
+
+/**
+ * Write index to file on server
+ *
+ * @param {string} indexPath - Path of .dat file on server
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
+
 function writeIndex (indexPath, callback) {
   var options = {
     method: 'POST',
@@ -94,6 +128,14 @@ function writeIndex (indexPath, callback) {
   talk (options, callback);
 }
 
+
+/**
+ * Clear index on server
+ *
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
+
 function clearIndex (callback) {
   var options = {
     method: 'POST',
@@ -105,6 +147,15 @@ function clearIndex (callback) {
 
   talk (options, callback);
 }
+
+
+/**
+ * Match image against index
+ *
+ * @param {string} image - Buffer or local path to image
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
 
 function searchIndex (image, callback) {
   var options = {
@@ -137,6 +188,15 @@ function searchIndex (image, callback) {
   });
 }
 
+
+/**
+ * Remove image signature from index
+ *
+ * @param {number} imageId - Index ID of image signature
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
+
 function deleteImage (imageId, callback) {
   var options = {
     method: 'DELETE',
@@ -145,6 +205,16 @@ function deleteImage (imageId, callback) {
 
   talk (options, callback);
 }
+
+
+/**
+ * Add image signature to index
+ *
+ * @param {string} image - Buffer or local path to image
+ * @param {number} imageId - Index ID for image
+ * @param {function} callback - Process result
+ * @returns {void}
+ */
 
 function addImage (image, imageId, callback) {
   var options = {
