@@ -77,7 +77,9 @@ function doNext () {
 }
 
 // doTest( passErr, 'methods', [
-//   ['fail', 'feeds', typeof feeds, 'object']
+//   ['fail', 'feeds', typeof feeds, 'object'],
+//   ['warn', 'music', music instanceof Object, true],
+//   ['info', 'tracks', music.length]
 // ])
 function doTest (err, label, tests) {
   var testErrors = [];
