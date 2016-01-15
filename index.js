@@ -170,6 +170,7 @@ function searchIndex (image, callback) {
       'Content-Length': image.length,
       'Content-Type': 'image/jpeg'
     };
+
     talk (options, callback);
     return;
   }
@@ -235,6 +236,7 @@ function addImage (image, imageId, callback) {
       'Content-Length': image.length,
       'Content-Type': 'image/jpeg'
     };
+
     talk (options, callback);
     return;
   }
@@ -251,6 +253,7 @@ function addImage (image, imageId, callback) {
       'Content-Length': data.length,
       'Content-Type': 'image/jpeg'
     };
+
     talk (options, callback);
   });
 }
