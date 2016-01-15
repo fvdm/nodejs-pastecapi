@@ -151,7 +151,7 @@ function clearIndex (callback) {
  * Match image against index
  *
  * @callback callback
- * @param {string} image - Buffer or local path to image
+ * @param {string|buffer} image - Buffer or local path to image
  * @param {function} callback - Process result
  * @returns {void}
  */
@@ -215,7 +215,7 @@ function deleteImage (imageId, callback) {
  * Add image signature to index
  *
  * @callback callback
- * @param {string} image - Buffer or local path to image
+ * @param {string|buffer} image - Buffer or local path to image
  * @param {number} imageId - Index ID for image
  * @param {function} callback - Process result
  * @returns {void}
