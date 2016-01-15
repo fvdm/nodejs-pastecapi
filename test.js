@@ -93,57 +93,60 @@ function doTest (err, label, tests) {
     console.log ();
     console.log (err.stack);
     console.log ();
+
     errors++;
-  } else {
-    for (i = 0; i < tests.length; i++) {
-      test = {
-        level: tests [i] [0],
-        label: tests [i] [1],
-        result: tests [i] [2],
-        expect: tests [i] [3]
-      };
+    doNext ();
+    return;
+  }
 
-      switch (test.level) {
-        case 'fail':
-          if (test.result !== test.expect) {
-            testErrors.push (test);
-            errors++;
-          }
-          break;
+  for (i = 0; i < tests.length; i++) {
+    test = {
+      level: tests [i] [0],
+      label: tests [i] [1],
+      result: tests [i] [2],
+      expect: tests [i] [3]
+    };
 
-        case 'warn':
-          if (test.result !== test.expect) {
-            testWarnings.push (test);
-            warnings++;
-          }
-          break;
+    switch (test.level) {
+      case 'fail':
+        if (test.result !== test.expect) {
+          testErrors.push (test);
+          errors++;
+        }
+        break;
 
-        case 'info':
-        default:
-          log ('info', test.label + ' - ' + test.result);
-          break;
-      }
+      case 'warn':
+        if (test.result !== test.expect) {
+          testWarnings.push (test);
+          warnings++;
+        }
+        break;
+
+      case 'info':
+      default:
+        log ('info', test.label + ' - ' + test.result);
+        break;
     }
+  }
 
-    if (!testErrors.length && !testWarnings.length) {
-      log ('good', label);
-    } else if (testErrors.length) {
-      log ('fail', label);
-    } else if (testWarnings.length) {
-      log ('warn', label);
-    }
+  if (!testErrors.length && !testWarnings.length) {
+    log ('good', label);
+  } else if (testErrors.length) {
+    log ('fail', label);
+  } else if (testWarnings.length) {
+    log ('warn', label);
+  }
 
-    if (testErrors.length) {
-      testErrors.forEach (function (testpart) {
-        log ('fail', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
-      });
-    }
+  if (testErrors.length) {
+    testErrors.forEach (function (testpart) {
+      log ('fail', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
+    });
+  }
 
-    if (testWarnings.length) {
-      testWarnings.forEach (function (testpart) {
-        log ('warn', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
-      });
-    }
+  if (testWarnings.length) {
+    testWarnings.forEach (function (testpart) {
+      log ('warn', ' └ ' + testpart.label + ': \'' + testpart.result + '\' is not \'' + testpart.expect + '\'');
+    });
   }
 
   doNext ();
