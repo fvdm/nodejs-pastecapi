@@ -31,7 +31,7 @@ var config = {};
 function talk (options, callback) {
   options.url = config.endpoint + options.path;
   options.method = options.method || 'GET';
-  options.timeout = config.timeout;
+  options.timeout = options.timeout || config.timeout;
   options.headers = options.headers || {};
   options.headers ['User-Agent'] = 'pastecapi node/' + process.versions.node;
 
