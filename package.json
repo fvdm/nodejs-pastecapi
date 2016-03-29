@@ -19,7 +19,7 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "httpreq": "^0.4"
+    "httpreq": "^0.4.16"
   },
   "engines": {
     "node": ">=4"
