@@ -16,13 +16,14 @@
     "url": "https://github.com/fvdm/nodejs-pastecapi/issues"
   },
   "scripts": {
-    "test": "node test.js"
+    "test": "eslint . && node test.js"
   },
   "dependencies": {
     "httpreq": "^0.4.16"
   },
   "devDependencies": {
-    "dotest": "^1.2.0"
+    "dotest": "^1.2.0",
+    "eslint": "^2.5.1"
   },
   "engines": {
     "node": ">=4"
