@@ -37,8 +37,9 @@ dotest.add ('Module', function () {
 dotest.add ('Method ping', function () {
   pastec.ping (function (err, data) {
     // no api = no tests
-    if (err) {
-      queue = [];
+    if (err && err.error.code === 'ECONNREFUSED') {
+      dotest.log ('fail', 'No API access');
+      process.exit();
     }
 
     dotest.test (err)
