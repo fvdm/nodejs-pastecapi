@@ -21,6 +21,9 @@
   "dependencies": {
     "httpreq": "^0.4.16"
   },
+  "devDependencies": {
+    "dotest": "^1.2.0"
+  },
   "engines": {
     "node": ">=4"
   },
