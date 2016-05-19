@@ -19,14 +19,14 @@
     "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
   },
   "dependencies": {
-    "httpreq": "^0.4.16"
+    "httpreq": "^0.4.22"
   },
   "devDependencies": {
-    "dotest": "^1.2.0",
-    "eslint": "^2.5.1"
+    "dotest": "^1.11.0",
+    "eslint": "^2.10.2"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=4.0.0"
   },
   "keywords": [
     "pastec",
