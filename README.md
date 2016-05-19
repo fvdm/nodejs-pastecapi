@@ -4,6 +4,7 @@ pastecapi
 Lightweight Node.js module for the Pastec image recognition API.
 
 [![Build Status](https://travis-ci.org/fvdm/nodejs-pastecapi.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-pastecapi)
+[![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-pastecapi.svg)](https://gemnasium.com/github.com/fvdm/nodejs-pastecapi)
 
 
 * [Node.js](https://nodejs.org)
