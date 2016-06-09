@@ -15,6 +15,7 @@ const dir = path.dirname (module.filename);
 
 const pastec = app (
   process.env.PASTEC_ENDPOINT || 'http://localhost:4212',
+  process.env.PASTEC_AUTHKEY || null,
   process.env.PASTEC_TIMEOUT || 5000
 );
 
