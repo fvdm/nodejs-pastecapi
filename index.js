@@ -35,6 +35,10 @@ function talk (options, callback) {
   options.headers = options.headers || {};
   options.headers ['User-Agent'] = 'pastecapi node/' + process.versions.node;
 
+  if (config.authkey) {
+    options.headers.AuthKey = config.authkey;
+  }
+
   httpreq.doRequest (options, function (err, res) {
     var data = res && res.body || '';
     var error = null;
@@ -267,9 +271,15 @@ function addImage (image, imageId, callback) {
  * @returns {object} - Module methods
  */
 
-module.exports = function (endpoint, timeout) {
+module.exports = function (endpoint, authkey, timeout) {
+  if (typeof authkey === 'number') {
+    timeout = authkey;
+    authkey = null;
+  }
+
   config.endpoint = endpoint || 'http://localhost:4121';
   config.timeout = timeout || 5000;
+  config.authkey = authkey || null;
 
   return {
     ping,
