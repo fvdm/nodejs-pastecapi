@@ -13,11 +13,11 @@ const app = require ('./');
 const path = require ('path');
 const dir = path.dirname (module.filename);
 
-const pastec = app (
-  process.env.PASTEC_ENDPOINT || 'http://localhost:4212',
-  process.env.PASTEC_AUTHKEY || null,
-  process.env.PASTEC_TIMEOUT || 5000
-);
+const endpoint = process.env.PASTEC_ENDPOINT || 'http://localhost:4212';
+const authkey = process.env.PASTEC_AUTHKEY || null;
+const timeout = process.env.PASTEC_TIMEOUT || 5000;
+
+const pastec = app (endpoint, authkey, timeout);
 
 
 // Tests
@@ -100,6 +100,19 @@ dotest.add ('Method deleteImage', function () {
     dotest.test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_REMOVED')
+      .done ();
+  });
+});
+
+dotest.add ('Error: invalid authkey', function () {
+  const tmp = app (endpoint, null, timeout);
+
+  tmp.ping (function (err, data) {
+    dotest.test ()
+      .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message)
+      .isExactly ('fail', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
+      .isUndefined ('fail', 'data', data)
       .done ();
   });
 });
