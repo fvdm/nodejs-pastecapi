@@ -34,6 +34,27 @@ Installation
 `npm install pastecapi`
 
 
+Configuration
+-------------
+
+The setup function takes these arguments:
+
+argument | type   | required | default                 | description
+:--------|:-------|:---------|:------------------------|:------------------
+endpoint | string | no       | `http://localhost:4121` | API endpoint
+authkey  | string | no       | `null`                  | API auth key, from `--auth-key` flag
+timeout  | number | no       | `5000`                  | Wait timeout in ms
+
+
+```js
+// All defaults
+var pastec = require ('pastecapi') ();
+
+// Only authkey
+var pastec = require ('pastecapi') (null, 'my key');
+```
+
+
 Methods
 -------
 
