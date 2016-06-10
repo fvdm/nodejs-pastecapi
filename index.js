@@ -14,6 +14,26 @@ var config = {};
 
 
 /**
+ * Process response error
+ *
+ * @callback callback
+ * @param message {string} - error.message
+ * @param err {Error, string} - error.error
+ * @param res {object} - httpreq response details
+ * @param callback {function} - `function (err) {}`
+ * @returns {void}
+ */
+
+function processError (message, err, res, callback) {
+  var error = new Error (message);
+
+  error.statusCode = res && res.statusCode;
+  error.error = err;
+  return callback (error);
+}
+
+
+/**
  * Process HTTP response
  *
  * @callback callback
@@ -25,26 +45,19 @@ var config = {};
 
 function processResponse (err, res, callback) {
   var data = res && res.body || '';
-  var error = null;
 
   if (err) {
-    error = new Error ('request failed');
-    error.error = err;
-    return callback (error);
+    return processError ('request failed', err, res, callback);
   }
 
   try {
     data = JSON.parse (data);
   } catch (e) {
-    error = new Error ('request failed');
-    error.error = e;
-    return callback (error);
+    return processError ('request failed', e, res, callback);
   }
 
   if (data.type === 'AUTHENTIFICATION_ERROR') {
-    error = new Error ('invalid authkey');
-    error.error = data.type;
-    return callback (error);
+    return processError ('invalid authkey', data.type, res, callback);
   }
 
   return callback (null, data);
