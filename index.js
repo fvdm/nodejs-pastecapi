@@ -267,7 +267,8 @@ function addImage (image, imageId, callback) {
  * Module setup
  *
  * @param {string} endpoint - REST API base URL
- * @param {integer} timeout - Request wait timeout in ms
+ * @param (string} authkey - API auth key (--auth-key flag)
+ * @param {number} timeout - Request wait timeout in ms
  * @returns {object} - Module methods
  */
 
