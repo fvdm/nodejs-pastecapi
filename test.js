@@ -93,6 +93,16 @@ dotest.add ('Method addImage - buffer', function (test) {
   });
 });
 
+dotest.add ('Method addImage - error', function (test) {
+  pastec.addImage ('', 999999999999999, function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .info (err.message)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
 dotest.add ('Method searchIndex', function (test) {
   pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
     test (err)
