@@ -103,11 +103,35 @@ dotest.add ('Method addImage - error', function (test) {
   });
 });
 
-dotest.add ('Method searchIndex', function (test) {
+dotest.add ('Method searchIndex - filename', function (test) {
   pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+      .done ();
+  });
+});
+
+
+dotest.add ('Method searchIndex - buffer', function (test) {
+  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
+    test (err);
+
+    pastec.searchIndex (file, function (err, data) {
+      test (err)
+        .isObject ('fail', 'data', data)
+        .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+        .done ();
+    });
+  });
+});
+
+dotest.add ('Method searchIndex - error', function (test) {
+  pastec.searchIndex ('', function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .info (err.message)
+      .isUndefined ('fail', 'data', data)
       .done ();
   });
 });
