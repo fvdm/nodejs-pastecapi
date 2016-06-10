@@ -46,8 +46,7 @@ function talk (options, callback) {
     if (err) {
       error = new Error ('request failed');
       error.error = err;
-      callback (error);
-      return;
+      return callback (error);
     }
 
     try {
@@ -55,18 +54,16 @@ function talk (options, callback) {
     } catch (e) {
       error = new Error ('request failed');
       error.error = e;
-      callback (error);
-      return;
+      return callback (error);
     }
 
     if (data.type === 'AUTHENTIFICATION_ERROR') {
       error = new Error ('invalid authkey');
       error.error = data.type;
-      callback (error);
-      return;
+      return callback (error);
     }
 
-    callback (null, data);
+    return callback (null, data);
   });
 }
 
@@ -182,15 +179,13 @@ function searchIndex (image, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    talk (options, callback);
-    return;
+    return talk (options, callback);
   }
 
   // Read file to buffer
   fs.readFile (image, function (err, data) {
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     options.body = data;
@@ -248,15 +243,13 @@ function addImage (image, imageId, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    talk (options, callback);
-    return;
+    return talk (options, callback);
   }
 
   // Read file to buffer
   fs.readFile (image, function (err, data) {
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     options.body = data;
