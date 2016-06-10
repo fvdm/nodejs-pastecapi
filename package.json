@@ -6,7 +6,7 @@
   },
   "name": "pastecapi",
   "description": "Lightweight module for Pastec image recognition API",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "index.js",
   "repository": {
     "type": "git",
