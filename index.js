@@ -59,7 +59,7 @@ function processResponse (err, res, callback) {
     return processError ('request failed', e, res, callback);
   }
 
-  if (data.type === 'AUTHENTIFICATION_ERROR') {
+  if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY)/)) {
     return processError ('invalid authkey', data.type, res, callback);
   }
 
@@ -84,7 +84,7 @@ function processResponse (err, res, callback) {
 
 function talk (options, callback) {
   if (config.indexid) {
-    options.path.replace (/^\/index/, '/indexes/' + config.indexid);
+    options.path = options.path.replace (/^\/index/, '/indexes/' + config.indexid);
   }
 
   options.url = config.endpoint + options.path;
