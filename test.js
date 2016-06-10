@@ -118,7 +118,7 @@ dotest.add ('Error: request failed', function () {
     dotest.test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'request failed')
-      .isObject ('fail', 'err.error', err && err.error)
+      .isError ('fail', 'err.error', err && err.error)
       .isExactly ('fail', 'err.error.code', err && err.error && err.error.code, 'TIMEOUT')
       .isUndefined ('fail', 'data', data)
       .done ();
