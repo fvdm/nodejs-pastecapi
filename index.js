@@ -10,7 +10,10 @@ License:      Unlicense (Public Domain, see LICENSE file)
 var httpreq = require ('httpreq');
 var fs = require ('fs');
 
-var config = {};
+var config = {
+  endpoint: 'http://localhost:4121',
+  timeout: 5000
+};
 
 
 /**
@@ -303,14 +306,20 @@ function addImage (image, imageId, callback) {
  */
 
 module.exports = function (endpoint, authkey, timeout) {
-  if (typeof authkey === 'number') {
-    timeout = authkey;
-    authkey = null;
+  if (typeof endpoint === 'object') {
+    config.endpoint = endpoint.endpoint || config.endpoint;
+    config.timeout = endpoint.timeout || config.timeout;
+    config.authkey = endpoint.authkey || null;
+  } else {
+    if (typeof authkey === 'number') {
+      timeout = authkey;
+      authkey = null;
+    }
+  
+    config.endpoint = endpoint || config.endpoint;
+    config.timeout = timeout || config.timeout;
+    config.authkey = authkey || null;
   }
-
-  config.endpoint = endpoint || 'http://localhost:4121';
-  config.timeout = timeout || 5000;
-  config.authkey = authkey || null;
 
   return {
     ping,
