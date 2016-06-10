@@ -15,10 +15,16 @@ const path = require ('path');
 const dir = path.dirname (module.filename);
 
 const endpoint = process.env.PASTEC_ENDPOINT || 'http://localhost:4212';
+const indexid = process.env.PASTEC_INDEXID || null;
 const authkey = process.env.PASTEC_AUTHKEY || null;
 const timeout = process.env.PASTEC_TIMEOUT || 5000;
 
-const pastec = app (endpoint, authkey, timeout);
+const pastec = app ({
+  endpoint,
+  indexid
+  authkey,
+  timeout
+});
 
 
 // Tests
