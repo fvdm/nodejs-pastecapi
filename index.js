@@ -59,6 +59,13 @@ function talk (options, callback) {
       return;
     }
 
+    if (data.type === 'AUTHENTIFICATION_ERROR') {
+      error = new Error ('invalid authkey');
+      error.error = data.type;
+      callback (error);
+      return;
+    }
+
     callback (null, data);
   });
 }
