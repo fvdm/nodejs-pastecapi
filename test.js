@@ -159,7 +159,7 @@ dotest.add ('Error: invalid authkey', function (test) {
     test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
-      .isExactly ('fail', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
+      .isExactly ('warn', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
       .isUndefined ('fail', 'data', data)
       .done ();
   });
