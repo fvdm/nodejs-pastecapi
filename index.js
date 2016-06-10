@@ -14,6 +14,44 @@ var config = {};
 
 
 /**
+ * Process HTTP response
+ *
+ * @callback callback
+ * @param err {Error, null} - httpreq error
+ * @param res {object} - httpreq response details
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function processResponse (err, res, callback) {
+  var data = res && res.body || '';
+  var error = null;
+
+  if (err) {
+    error = new Error ('request failed');
+    error.error = err;
+    return callback (error);
+  }
+
+  try {
+    data = JSON.parse (data);
+  } catch (e) {
+    error = new Error ('request failed');
+    error.error = e;
+    return callback (error);
+  }
+
+  if (data.type === 'AUTHENTIFICATION_ERROR') {
+    error = new Error ('invalid authkey');
+    error.error = data.type;
+    return callback (error);
+  }
+
+  return callback (null, data);
+}
+
+
+/**
  * Communicate with API
  *
  * @callback callback
@@ -39,32 +77,11 @@ function talk (options, callback) {
     options.headers.AuthKey = config.authkey;
   }
 
-  httpreq.doRequest (options, function (err, res) {
-    var data = res && res.body || '';
-    var error = null;
+  function doResponse (err, res) {
+    processResponse (err, res, callback);
+  }
 
-    if (err) {
-      error = new Error ('request failed');
-      error.error = err;
-      return callback (error);
-    }
-
-    try {
-      data = JSON.parse (data);
-    } catch (e) {
-      error = new Error ('request failed');
-      error.error = e;
-      return callback (error);
-    }
-
-    if (data.type === 'AUTHENTIFICATION_ERROR') {
-      error = new Error ('invalid authkey');
-      error.error = data.type;
-      return callback (error);
-    }
-
-    return callback (null, data);
-  });
+  httpreq.doRequest (options, doResponse);
 }
 
 
