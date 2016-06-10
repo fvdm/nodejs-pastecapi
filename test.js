@@ -82,7 +82,7 @@ dotest.add ('Method addImage - filename', function (test) {
 
 dotest.add ('Method addImage - buffer', function (test) {
   fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
-    test (err);
+    test (errFile);
 
     pastec.addImage (file, 999999999999999, function (err, data) {
       test (err)
@@ -115,7 +115,7 @@ dotest.add ('Method searchIndex - filename', function (test) {
 
 dotest.add ('Method searchIndex - buffer', function (test) {
   fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
-    test (err);
+    test (errFile);
 
     pastec.searchIndex (file, function (err, data) {
       test (err)
