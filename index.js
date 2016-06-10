@@ -83,6 +83,10 @@ function processResponse (err, res, callback) {
  */
 
 function talk (options, callback) {
+  if (config.indexid) {
+    options.path.replace (/^\/index/, '/indexes/' + config.indexid;
+  }
+
   options.url = config.endpoint + options.path;
   options.method = options.method || 'GET';
   options.timeout = options.timeout || config.timeout;
@@ -308,8 +312,9 @@ function addImage (image, imageId, callback) {
 module.exports = function (endpoint, authkey, timeout) {
   if (typeof endpoint === 'object') {
     config.endpoint = endpoint.endpoint || config.endpoint;
-    config.timeout = endpoint.timeout || config.timeout;
+    config.indexid = endpoint.indexid || null;
     config.authkey = endpoint.authkey || null;
+    config.timeout = endpoint.timeout || config.timeout;
   } else {
     if (typeof authkey === 'number') {
       timeout = authkey;
