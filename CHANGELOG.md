@@ -1,3 +1,9 @@
+#### 1.2.3 (2016-6-10)
+
+##### Documentation Changes
+
+* **badges:** Fixed dependencies deeplink ([1d885a47](https://github.com/fvdm/nodejs-pastecapi/commit/1d885a47d6702b3cb6f154d5fc928ede3a730c06))
+
 #### 1.2.2 (2016-6-10)
 
 ##### Documentation Changes
