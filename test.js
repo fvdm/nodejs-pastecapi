@@ -21,8 +21,8 @@ const pastec = app (endpoint, authkey, timeout);
 
 
 // Tests
-dotest.add ('Module', function () {
-  dotest.test ()
+dotest.add ('Module', function (test) {
+  test ()
     .isFunction ('fail', 'exports', app)
     .isObject ('fail', 'module', pastec)
     .isFunction ('fail', '.ping', pastec && pastec.ping)
@@ -35,74 +35,74 @@ dotest.add ('Module', function () {
     .done ();
 });
 
-dotest.add ('Method ping', function () {
+dotest.add ('Method ping', function (test) {
   pastec.ping (function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'PONG')
       .done ();
   });
 });
 
-dotest.add ('Method writeIndex', function () {
+dotest.add ('Method writeIndex', function (test) {
   pastec.writeIndex ('./sampleIndex.dat', function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'INDEX_WRITTEN')
       .done ();
   });
 });
 
-dotest.add ('Method clearIndex', function () {
+dotest.add ('Method clearIndex', function (test) {
   pastec.clearIndex (function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'INDEX_CLEARED')
       .done ();
   });
 });
 
-dotest.add ('Method loadIndex', function () {
+dotest.add ('Method loadIndex', function (test) {
   pastec.loadIndex ('./sampleIndex.dat', function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'INDEX_LOADED')
       .done ();
   });
 });
 
-dotest.add ('Method addImage', function () {
+dotest.add ('Method addImage', function (test) {
   pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
       .done ();
   });
 });
 
-dotest.add ('Method searchIndex', function () {
+dotest.add ('Method searchIndex', function (test) {
   pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
       .done ();
   });
 });
 
-dotest.add ('Method deleteImage', function () {
+dotest.add ('Method deleteImage', function (test) {
   pastec.deleteImage (999999999999999, function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_REMOVED')
       .done ();
   });
 });
 
-dotest.add ('Error: invalid authkey', function () {
+dotest.add ('Error: invalid authkey', function (test) {
   const tmp = app (endpoint, timeout);
 
   tmp.ping (function (err, data) {
-    dotest.test ()
+    test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
       .isExactly ('fail', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
@@ -111,11 +111,11 @@ dotest.add ('Error: invalid authkey', function () {
   });
 });
 
-dotest.add ('Error: request failed', function () {
+dotest.add ('Error: request failed', function (test) {
   const tmp = app (endpoint, authkey, 1);
 
   tmp.ping (function (err, data) {
-    dotest.test ()
+    test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'request failed')
       .isError ('fail', 'err.error', err && err.error)
