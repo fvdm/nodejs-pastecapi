@@ -86,7 +86,7 @@ function talk (options, callback) {
   if (config.indexid) {
     options.path = options.path.replace (/^\/index/, '/indexes/' + config.indexid);
 
-    if (options.json.type === 'PING') {
+    if (options.json && options.json.type === 'PING') {
       return callback (new Error ('endpoint does not allow ping'));
     }
   }
