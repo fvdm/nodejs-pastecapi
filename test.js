@@ -21,7 +21,7 @@ const timeout = process.env.PASTEC_TIMEOUT || 5000;
 
 const pastec = app ({
   endpoint,
-  indexid
+  indexid,
   authkey,
   timeout
 });
