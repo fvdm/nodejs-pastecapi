@@ -99,7 +99,7 @@ dotest.add ('Method deleteImage', function () {
 });
 
 dotest.add ('Error: invalid authkey', function () {
-  const tmp = app (endpoint, null, timeout);
+  const tmp = app (endpoint, timeout);
 
   tmp.ping (function (err, data) {
     dotest.test ()
