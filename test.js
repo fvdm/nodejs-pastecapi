@@ -155,7 +155,7 @@ dotest.add ('Method deleteImage', function (test) {
 dotest.add ('Error: invalid authkey', function (test) {
   const tmp = app (endpoint, timeout);
 
-  tmp.ping (function (err, data) {
+  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
     test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
@@ -168,7 +168,7 @@ dotest.add ('Error: invalid authkey', function (test) {
 dotest.add ('Error: request failed', function (test) {
   const tmp = app (endpoint, authkey, 1);
 
-  tmp.ping (function (err, data) {
+  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
     test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'request failed')
