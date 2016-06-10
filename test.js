@@ -8,6 +8,7 @@ License:        Unlicense (Public Domain, see LICENSE file)
 */
 
 
+const fs = require ('fs');
 const dotest = require ('dotest');
 const app = require ('./');
 const path = require ('path');
