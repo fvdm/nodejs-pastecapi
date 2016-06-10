@@ -1,3 +1,9 @@
+#### 1.2.1 (2016-6-10)
+
+##### Documentation Changes
+
+* **readme:** Add configuration section ([51b583fe](https://github.com/fvdm/nodejs-pastecapi/commit/51b583fecb4c176f8f70e5fa76d43c199d7941e6))
+
 ### 1.2.0 (2016-6-10)
 
 ##### Chores
