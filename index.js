@@ -194,7 +194,7 @@ function searchIndex (image, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    talk (options, callback);
+    return talk (options, callback);
   });
 }
 
@@ -258,7 +258,7 @@ function addImage (image, imageId, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    talk (options, callback);
+    return talk (options, callback);
   });
 }
 
