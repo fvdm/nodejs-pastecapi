@@ -71,12 +71,25 @@ dotest.add ('Method loadIndex', function (test) {
   });
 });
 
-dotest.add ('Method addImage', function (test) {
+dotest.add ('Method addImage - filename', function (test) {
   pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
       .done ();
+  });
+});
+
+dotest.add ('Method addImage - buffer', function (test) {
+  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
+    test (err);
+
+    pastec.addImage (file, 999999999999999, function (err, data) {
+      test (err)
+        .isObject ('fail', 'data', data)
+        .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
+        .done ();
+    });
   });
 });
 
