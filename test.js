@@ -37,12 +37,6 @@ dotest.add ('Module', function () {
 
 dotest.add ('Method ping', function () {
   pastec.ping (function (err, data) {
-    // no api = no tests
-    if (err && err.error.code === 'ECONNREFUSED') {
-      dotest.log ('fail', 'No API access');
-      process.exit();
-    }
-
     dotest.test (err)
       .isObject ('fail', 'data', data)
       .isExactly ('warn', 'data.type', data && data.type, 'PONG')
