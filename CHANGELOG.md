@@ -1,3 +1,9 @@
+#### 1.2.2 (2016-6-10)
+
+##### Documentation Changes
+
+* **readme:** Clarify configuration syntax ([8d2de9fd](https://github.com/fvdm/nodejs-pastecapi/commit/8d2de9fd8fa06e1c829369e4f99bc4e9958435d4))
+
 #### 1.2.1 (2016-6-10)
 
 ##### Documentation Changes
