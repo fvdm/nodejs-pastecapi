@@ -84,7 +84,7 @@ function processResponse (err, res, callback) {
 
 function talk (options, callback) {
   if (config.indexid) {
-    options.path.replace (/^\/index/, '/indexes/' + config.indexid;
+    options.path.replace (/^\/index/, '/indexes/' + config.indexid);
   }
 
   options.url = config.endpoint + options.path;
