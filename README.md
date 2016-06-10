@@ -36,6 +36,7 @@ Installation
 
 Configuration
 -------------
+**( [endpoint], [authkey], [timeout] )**
 
 The setup function takes these arguments:
 
