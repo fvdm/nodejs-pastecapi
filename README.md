@@ -2,6 +2,7 @@ pastecapi
 =========
 
 Lightweight Node.js module for the Pastec image recognition API.
+Both the opensource and Hosted API are supported.
 
 [![npm](https://img.shields.io/npm/v/pastecapi.svg?maxAge=3600)](https://github.com/fvdm/nodejs-pastecapi/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-pastecapi.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-pastecapi)
