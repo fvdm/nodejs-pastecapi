@@ -60,7 +60,7 @@ var pastec = require ('pastecapi') ();
 
 // Example 2 - Using Hosted API (Pastec.io)
 var pastec = require ('pastecapi') ({
-  endpoint: 'https://api.pasted.io',
+  endpoint: 'https://api.pastec.io',
   indexid: 'your index id'
   authkey: 'your authentication key'
 });
