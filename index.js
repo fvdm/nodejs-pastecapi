@@ -32,7 +32,7 @@ function processError (message, err, res, callback) {
 
   error.statusCode = res && res.statusCode;
   error.error = err;
-  return callback (error);
+  callback (error);
 }
 
 
@@ -50,20 +50,23 @@ function processResponse (err, res, callback) {
   var data = res && res.body || '';
 
   if (err) {
-    return processError ('request failed', err, res, callback);
+    processError ('request failed', err, res, callback);
+    return;
   }
 
   try {
     data = JSON.parse (data);
   } catch (e) {
-    return processError ('request failed', e, res, callback);
+    processError ('request failed', e, res, callback);
+    return;
   }
 
   if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY)/)) {
-    return processError ('invalid authkey', data.type, res, callback);
+    processError ('invalid authkey', data.type, res, callback);
+    return;
   }
 
-  return callback (null, data);
+  callback (null, data);
 }
 
 
@@ -87,7 +90,8 @@ function talk (options, callback) {
     options.path = options.path.replace (/^\/index/, '/indexes/' + config.indexid);
 
     if (options.json && options.json.type === 'PING') {
-      return callback (new Error ('endpoint does not allow ping'));
+      callback (new Error ('endpoint does not allow ping'));
+      return;
     }
   }
 
@@ -220,13 +224,15 @@ function searchIndex (image, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    return talk (options, callback);
+    talk (options, callback);
+    return;
   }
 
   // Read file to buffer
   fs.readFile (image, function (err, data) {
     if (err) {
-      return callback (err);
+      callback (err);
+      return;
     }
 
     options.body = data;
@@ -235,7 +241,7 @@ function searchIndex (image, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    return talk (options, callback);
+    talk (options, callback);
   });
 }
 
@@ -284,13 +290,15 @@ function addImage (image, imageId, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    return talk (options, callback);
+    talk (options, callback);
+    return;
   }
 
   // Read file to buffer
   fs.readFile (image, function (err, data) {
     if (err) {
-      return callback (err);
+      callback (err);
+      return;
     }
 
     options.body = data;
@@ -299,7 +307,7 @@ function addImage (image, imageId, callback) {
       'Content-Type': 'image/jpeg'
     };
 
-    return talk (options, callback);
+    talk (options, callback);
   });
 }
 
