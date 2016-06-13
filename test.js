@@ -14,17 +14,21 @@ const app = require ('./');
 const path = require ('path');
 const dir = path.dirname (module.filename);
 
-const endpoint = process.env.PASTEC_ENDPOINT || 'http://localhost:4212';
-const indexid = process.env.PASTEC_INDEXID || null;
-const authkey = process.env.PASTEC_AUTHKEY || null;
-const timeout = process.env.PASTEC_TIMEOUT || 5000;
+const opensource = {
+  endpoint: process.env.OPENSOURCE_ENDPOINT || 'http://localhost:4212',
+  indexid: process.env.OPENSOURCE_INDEXID || null,
+  authkey: process.env.OPENSOURCE_AUTHKEY || null,
+  timeout: process.env.OPENSOURCE_TIMEOUT || 5000
+};
 
-const pastec = app ({
-  endpoint,
-  indexid,
-  authkey,
-  timeout
-});
+const hosted = {
+  endpoint: process.env.HOSTED_ENDPOINT || 'https://api.pastec.io',
+  indexid: process.env.HOSTED_INDEXID || null,
+  authkey: process.env.HOSTED_AUTHKEY || null,
+  timeout: process.env.HOSTED_TIMEOUT || 5000
+};
+
+let pastec = app (opensource);
 
 
 // Tests
@@ -32,6 +36,7 @@ dotest.add ('Module', function (test) {
   test ()
     .isFunction ('fail', 'exports', app)
     .isObject ('fail', 'module', pastec)
+    .isObject ('fail', '.config', pastec && pastec.config)
     .isFunction ('fail', '.ping', pastec && pastec.ping)
     .isFunction ('fail', '.writeIndex', pastec && pastec.writeIndex)
     .isFunction ('fail', '.clearIndex', pastec && pastec.clearIndex)
@@ -42,7 +47,12 @@ dotest.add ('Module', function (test) {
     .done ();
 });
 
-dotest.add ('Method ping', function (test) {
+
+/**
+ * Opensource API
+ */
+
+dotest.add ('Opensource API - Method ping', function (test) {
   pastec.ping (function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -51,7 +61,7 @@ dotest.add ('Method ping', function (test) {
   });
 });
 
-dotest.add ('Method writeIndex', function (test) {
+dotest.add ('Opensource API - Method writeIndex', function (test) {
   pastec.writeIndex ('./sampleIndex.dat', function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -60,7 +70,7 @@ dotest.add ('Method writeIndex', function (test) {
   });
 });
 
-dotest.add ('Method clearIndex', function (test) {
+dotest.add ('Opensource API - Method clearIndex', function (test) {
   pastec.clearIndex (function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -69,7 +79,7 @@ dotest.add ('Method clearIndex', function (test) {
   });
 });
 
-dotest.add ('Method loadIndex', function (test) {
+dotest.add ('Opensource API - Method loadIndex', function (test) {
   pastec.loadIndex ('./sampleIndex.dat', function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -78,7 +88,7 @@ dotest.add ('Method loadIndex', function (test) {
   });
 });
 
-dotest.add ('Method addImage - filename', function (test) {
+dotest.add ('Opensource API - Method addImage - filename', function (test) {
   pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -87,7 +97,7 @@ dotest.add ('Method addImage - filename', function (test) {
   });
 });
 
-dotest.add ('Method addImage - buffer', function (test) {
+dotest.add ('Opensource API - Method addImage - buffer', function (test) {
   fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
     test (errFile);
 
@@ -100,7 +110,7 @@ dotest.add ('Method addImage - buffer', function (test) {
   });
 });
 
-dotest.add ('Method addImage - error', function (test) {
+dotest.add ('Opensource API - Method addImage - error', function (test) {
   pastec.addImage ('', 999999999999999, function (err, data) {
     test ()
       .isError ('fail', 'err', err)
@@ -110,7 +120,7 @@ dotest.add ('Method addImage - error', function (test) {
   });
 });
 
-dotest.add ('Method searchIndex - filename', function (test) {
+dotest.add ('Opensource API - Method searchIndex - filename', function (test) {
   pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -120,7 +130,7 @@ dotest.add ('Method searchIndex - filename', function (test) {
 });
 
 
-dotest.add ('Method searchIndex - buffer', function (test) {
+dotest.add ('Opensource API - Method searchIndex - buffer', function (test) {
   fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
     test (errFile);
 
@@ -133,7 +143,7 @@ dotest.add ('Method searchIndex - buffer', function (test) {
   });
 });
 
-dotest.add ('Method searchIndex - error', function (test) {
+dotest.add ('Opensource API - Method searchIndex - error', function (test) {
   pastec.searchIndex ('', function (err, data) {
     test ()
       .isError ('fail', 'err', err)
@@ -143,7 +153,7 @@ dotest.add ('Method searchIndex - error', function (test) {
   });
 });
 
-dotest.add ('Method deleteImage', function (test) {
+dotest.add ('Opensource API - Method deleteImage', function (test) {
   pastec.deleteImage (999999999999999, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
@@ -152,8 +162,13 @@ dotest.add ('Method deleteImage', function (test) {
   });
 });
 
-dotest.add ('Error: invalid authkey', function (test) {
-  const tmp = app (endpoint, timeout);
+dotest.add ('Opensource API - Error: invalid authkey', function (test) {
+  const tmp = app ({
+    endpoint: opensource.endpoint,
+    indexid: opensource.indexid,
+    authkey: '-',
+    timeout: opensource.timeout
+  });
 
   tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
     test ()
@@ -165,8 +180,168 @@ dotest.add ('Error: invalid authkey', function (test) {
   });
 });
 
-dotest.add ('Error: request failed', function (test) {
-  const tmp = app (endpoint, authkey, 1);
+dotest.add ('Opensource API - Error: request failed', function (test) {
+  const tmp = app ({
+    endpoint: opensource.endpoint,
+    indexid: opensource.indexid,
+    authkey: opensource.authkey,
+    timeout: 1
+  });
+
+  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message, 'request failed')
+      .isError ('fail', 'err.error', err && err.error)
+      .isExactly ('fail', 'err.error.code', err && err.error && err.error.code, 'TIMEOUT')
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+
+/**
+ * Hosted API
+ */
+
+dotest.add ('Hosted API - Method ping', function (test) {
+  pastec = app (hosted);
+
+  pastec.ping (function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message, 'endpoint does not allow ping')
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method writeIndex', function (test) {
+  pastec.writeIndex ('./sampleIndex.dat', function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_WRITTEN')
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method clearIndex', function (test) {
+  pastec.clearIndex (function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_CLEARED')
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method loadIndex', function (test) {
+  pastec.loadIndex ('./sampleIndex.dat', function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_LOADED')
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method addImage - filename', function (test) {
+  pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method addImage - buffer', function (test) {
+  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
+    test (errFile);
+
+    pastec.addImage (file, 999999999999999, function (err, data) {
+      test (err)
+        .isObject ('fail', 'data', data)
+        .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
+        .done ();
+    });
+  });
+});
+
+dotest.add ('Hosted API - Method addImage - error', function (test) {
+  pastec.addImage ('', 999999999999999, function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .info (err.message)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method searchIndex - filename', function (test) {
+  pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+      .done ();
+  });
+});
+
+
+dotest.add ('Hosted API - Method searchIndex - buffer', function (test) {
+  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
+    test (errFile);
+
+    pastec.searchIndex (file, function (err, data) {
+      test (err)
+        .isObject ('fail', 'data', data)
+        .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+        .done ();
+    });
+  });
+});
+
+dotest.add ('Hosted API - Method searchIndex - error', function (test) {
+  pastec.searchIndex ('', function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .info (err.message)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Method deleteImage', function (test) {
+  pastec.deleteImage (999999999999999, function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_REMOVED')
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Error: invalid authkey', function (test) {
+  const tmp = app ({
+    endpoint: hosted.endpoint,
+    indexid: hosted.indexid,
+    authkey: '-',
+    timeout: hosted.timeout
+  });
+
+  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
+      .isExactly ('warn', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+dotest.add ('Hosted API - Error: request failed', function (test) {
+  const tmp = app ({
+    endpoint: hosted.endpoint,
+    indexid: hosted.indexid,
+    authkey: hosted.authkey,
+    timeout: 1
+  });
 
   tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
     test ()
