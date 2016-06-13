@@ -84,6 +84,14 @@ function myCallback (err, data) {
 pastec.searchIndex ('~/image.jpg', myCallback);
 ```
 
+#### Errors
+
+message                      | description              
+:----------------------------|:--------------------------------------------------------
+request failed               | Request error occured, see `err.statusCode`, `err.error`
+invalid authkey              | Your `authkey` or `indexid` is invalid
+endpoint does not allow ping | The API does not accept [.ping](#ping) method
+
 
 ### .addImage
 **( image, imageId, callback )**
