@@ -18,7 +18,9 @@ Example
 -------
 
 ```js
-var pastec = require ('pastecapi') ('https://my-pastec-server:4212');
+var pastec = require ('pastecapi') ({
+  endpoint: 'https://my-pastec-server:4212'
+});
 
 // Add image signature to index
 pastec.addImage ('./advertising.jpg', console.log);
@@ -36,12 +38,15 @@ Installation
 
 Configuration
 -------------
+**( [config] )**
+
 **( [endpoint], [authkey], [timeout] )**
 
-The setup function takes these arguments:
 
-argument | type   | required | default                 | description
-:--------|:-------|:---------|:------------------------|:------------------
+The setup function can take either a config object with settings or arguments.
+
+
+setting  | type   | required | default                 | description
 endpoint | string | no       | `http://localhost:4121` | API endpoint
 authkey  | string | no       | `null`                  | API auth key, from `--auth-key` flag
 timeout  | number | no       | `5000`                  | Wait timeout in ms
@@ -51,8 +56,12 @@ timeout  | number | no       | `5000`                  | Wait timeout in ms
 // All defaults
 var pastec = require ('pastecapi') ();
 
-// Only authkey
-var pastec = require ('pastecapi') (null, 'my key');
+// Or using Hosted API (Pastec.io)
+var pastec = require ('pastecapi') ({
+  endpoint: 'https://api.pasted.io',
+  indexid: 'your index id'
+  authkey: 'your authentication key'
+});
 ```
 
 
