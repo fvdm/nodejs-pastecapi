@@ -201,6 +201,8 @@ pastec.clearIndex (console.log);
 
 Ping the server to test API access.
 
+**Note:** `.ping` is not available on the Hosted API at `api.pastec.io`.
+
 
 param    | type     | required | description
 :--------|:---------|:---------|:--------------
