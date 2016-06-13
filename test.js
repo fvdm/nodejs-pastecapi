@@ -8,27 +8,27 @@ License:        Unlicense (Public Domain, see LICENSE file)
 */
 
 
-const fs = require ('fs');
-const dotest = require ('dotest');
-const app = require ('./');
-const path = require ('path');
-const dir = path.dirname (module.filename);
+var fs = require ('fs');
+var dotest = require ('dotest');
+var app = require ('./');
+var path = require ('path');
+var dir = path.dirname (module.filename);
 
-const opensource = {
+var opensource = {
   endpoint: process.env.OPENSOURCE_ENDPOINT || 'http://localhost:4212',
   indexid: process.env.OPENSOURCE_INDEXID || null,
   authkey: process.env.OPENSOURCE_AUTHKEY || null,
   timeout: process.env.OPENSOURCE_TIMEOUT || 5000
 };
 
-const hosted = {
+var hosted = {
   endpoint: process.env.HOSTED_ENDPOINT || 'https://api.pastec.io',
   indexid: process.env.HOSTED_INDEXID || null,
   authkey: process.env.HOSTED_AUTHKEY || null,
   timeout: process.env.HOSTED_TIMEOUT || 5000
 };
 
-let pastec = app (opensource);
+var pastec = app (opensource);
 
 
 // Tests
@@ -163,7 +163,7 @@ dotest.add ('Opensource API - Method deleteImage', function (test) {
 });
 
 dotest.add ('Opensource API - Error: invalid authkey', function (test) {
-  const tmp = app ({
+  var tmp = app ({
     endpoint: opensource.endpoint,
     indexid: opensource.indexid,
     authkey: '-',
@@ -181,7 +181,7 @@ dotest.add ('Opensource API - Error: invalid authkey', function (test) {
 });
 
 dotest.add ('Opensource API - Error: request failed', function (test) {
-  const tmp = app ({
+  var tmp = app ({
     endpoint: opensource.endpoint,
     indexid: opensource.indexid,
     authkey: opensource.authkey,
@@ -318,7 +318,7 @@ dotest.add ('Hosted API - Method deleteImage', function (test) {
 });
 
 dotest.add ('Hosted API - Error: invalid authkey', function (test) {
-  const tmp = app ({
+  var tmp = app ({
     endpoint: hosted.endpoint,
     indexid: hosted.indexid,
     authkey: '-',
@@ -336,7 +336,7 @@ dotest.add ('Hosted API - Error: invalid authkey', function (test) {
 });
 
 dotest.add ('Hosted API - Error: request failed', function (test) {
-  const tmp = app ({
+  var tmp = app ({
     endpoint: hosted.endpoint,
     indexid: hosted.indexid,
     authkey: hosted.authkey,
@@ -355,7 +355,7 @@ dotest.add ('Hosted API - Error: request failed', function (test) {
 });
 
 dotest.add ('Setup arguments', function (test) {
-  const tmp = app ('example.lan', 123);
+  var tmp = app ('example.lan', 123);
 
   test ()
     .isExactly ('fail', 'config.endpoint', tmp.config.endpoint, 'example.lan')
