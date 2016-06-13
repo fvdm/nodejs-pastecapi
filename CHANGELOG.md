@@ -1,3 +1,9 @@
+#### 1.3.2 (2016-6-14)
+
+##### Documentation Changes
+
+* **fix:** Fixed endpoint typo ([590c4227](https://github.com/fvdm/nodejs-pastecapi/commit/590c42271a605a5ed453b075c5b1dfa842aa840e))
+
 #### 1.3.1 (2016-6-14)
 
 ##### Documentation Changes
