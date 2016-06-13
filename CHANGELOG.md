@@ -1,3 +1,43 @@
+### 1.3.0 (2016-6-13)
+
+##### Chores
+
+* **package:** Update eslint dev dep ([d9a97743](https://github.com/fvdm/nodejs-pastecapi/commit/d9a977435c2848636a8aacd3596fb6693b6e6f55))
+
+##### New Features
+
+* **interface:** Add .config to interface ([2f1858c3](https://github.com/fvdm/nodejs-pastecapi/commit/2f1858c3fc35c06a755846e2885efc9a9070dcce))
+* **setup:**
+  * Add indexid configuration setting ([3d8d0803](https://github.com/fvdm/nodejs-pastecapi/commit/3d8d080378d743e8e9fba8be6f1131fd68bf0ff1))
+  * Allow config object instead of arguments ([5da2b7bb](https://github.com/fvdm/nodejs-pastecapi/commit/5da2b7bb034c0637d2a2e9fcb6809e8117a5d245))
+
+##### Bug Fixes
+
+* **cleanup:** Remove trailing whitespace ([0bddeeed](https://github.com/fvdm/nodejs-pastecapi/commit/0bddeeedb4a365eb317239e61d9f49adad417d23))
+* **http:**
+  * Ping error only for hosted API ([5b1c1e94](https://github.com/fvdm/nodejs-pastecapi/commit/5b1c1e94c463f8d4ca4b39690816d50cf5bad88b))
+  * Catch another authkey error ([7806602f](https://github.com/fvdm/nodejs-pastecapi/commit/7806602faab5d62c7ad301800589c52566dde125))
+  * Check options.json existence ([d5562284](https://github.com/fvdm/nodejs-pastecapi/commit/d5562284f9783845e3c7dc46c87f0b1ba173e328))
+  * Hosted API does not allow ping ([3b3c320b](https://github.com/fvdm/nodejs-pastecapi/commit/3b3c320ba49d3b214564a147ae0c8f2572c2231a))
+  * Fixed path index and invalid authkey error ([edea3fce](https://github.com/fvdm/nodejs-pastecapi/commit/edea3fce11c27aac23754818e92100c0c373a562))
+  * Fixed syntax typo) ([ef87698c](https://github.com/fvdm/nodejs-pastecapi/commit/ef87698ca00d377243c551017d57bf6520589ea2))
+
+##### Refactors
+
+* **style:** Restore cleaner returns ([04462f49](https://github.com/fvdm/nodejs-pastecapi/commit/04462f49c5d1357ca87619e40de6361436bfcdd5))
+
+##### Tests
+
+* **style:** Replace const/let with var ([61baf41e](https://github.com/fvdm/nodejs-pastecapi/commit/61baf41e4608286864527eb30162cd5da09bae16))
+* **tests:**
+  * Run both opensource and hosted APIs ([6fdf6f68](https://github.com/fvdm/nodejs-pastecapi/commit/6fdf6f68dd5e2d6253b287d68ddf0e102275de44))
+  * Add Setup with arguments ([887641f5](https://github.com/fvdm/nodejs-pastecapi/commit/887641f5d54b387bb62f945fbd62c624b8283b3d))
+* **fix:**
+  * warn about invalid authkey response ([3fd33fc2](https://github.com/fvdm/nodejs-pastecapi/commit/3fd33fc228457afeb5280187ea236f384a500cdf))
+  * Use writeIndex instead of ping for errors ([4749b050](https://github.com/fvdm/nodejs-pastecapi/commit/4749b050c917a4a6cda2107ef05788726972e67c))
+  * Fixed syntax typo ([01d91882](https://github.com/fvdm/nodejs-pastecapi/commit/01d91882d85347ce2aae4340cca5f13179a39d38))
+* **setup:** Add PASTEC_INDEXID, use object config ([f7e1f5f1](https://github.com/fvdm/nodejs-pastecapi/commit/f7e1f5f1986ea56a8f50aa32fc283bcbb9510328))
+
 #### 1.2.3 (2016-6-10)
 
 ##### Documentation Changes
