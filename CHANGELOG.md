@@ -1,3 +1,16 @@
+#### 1.3.1 (2016-6-14)
+
+##### Documentation Changes
+
+* **methods:** Mention ping unavailable at hosted API ([cbed8d8e](https://github.com/fvdm/nodejs-pastecapi/commit/cbed8d8ebd116314346b06f9461b20588967e7a8))
+* **configuration:**
+  * Mention hosted API for authkey ([171636cd](https://github.com/fvdm/nodejs-pastecapi/commit/171636cd92655689fd9097b2f43f7285f067bd0a))
+  * Add indexid setting ([7e331dd1](https://github.com/fvdm/nodejs-pastecapi/commit/7e331dd1b7f2a55fb2e95b76ce4e2490f48d57ef))
+  * Clarify configs are examples ([22c96774](https://github.com/fvdm/nodejs-pastecapi/commit/22c967745be3d78167cc2645fed1915cc99ad143))
+  * Use object config ([224c6ebc](https://github.com/fvdm/nodejs-pastecapi/commit/224c6ebcd8960a78528c4caeb741ac3422160948))
+* **readme:** Add error messages ([6f139bd3](https://github.com/fvdm/nodejs-pastecapi/commit/6f139bd3ead8261f601413ad20fd36400043a856))
+* **intro:** Mention opensource and hosted APIs ([4a922837](https://github.com/fvdm/nodejs-pastecapi/commit/4a922837cb4bfc63bdcbcc57aa3b1f6e2680e1a6))
+
 ### 1.3.0 (2016-6-13)
 
 ##### Chores
