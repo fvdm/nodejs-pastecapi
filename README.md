@@ -49,6 +49,7 @@ The setup function can take either a config object with settings or arguments.
 setting  | type   | required | default                 | description
 endpoint | string | no       | `http://localhost:4121` | API endpoint
 authkey  | string | no       | `null`                  | API auth key, from `--auth-key` flag
+indexid  | string | no       |                         | Hosted API Index ID
 timeout  | number | no       | `5000`                  | Wait timeout in ms
 
 
