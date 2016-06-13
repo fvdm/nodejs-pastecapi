@@ -339,6 +339,7 @@ module.exports = function (endpoint, authkey, timeout) {
   }
 
   return {
+    config,
     ping,
     loadIndex,
     writeIndex,
