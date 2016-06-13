@@ -332,7 +332,7 @@ module.exports = function (endpoint, authkey, timeout) {
       timeout = authkey;
       authkey = null;
     }
-  
+
     config.endpoint = endpoint || config.endpoint;
     config.timeout = timeout || config.timeout;
     config.authkey = authkey || null;
