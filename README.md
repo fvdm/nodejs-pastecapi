@@ -53,10 +53,10 @@ timeout  | number | no       | `5000`                  | Wait timeout in ms
 
 
 ```js
-// All defaults
+// Example 1 - All defaults
 var pastec = require ('pastecapi') ();
 
-// Or using Hosted API (Pastec.io)
+// Example 2 - Using Hosted API (Pastec.io)
 var pastec = require ('pastecapi') ({
   endpoint: 'https://api.pasted.io',
   indexid: 'your index id'
