@@ -61,7 +61,7 @@ function processResponse (err, res, callback) {
     return;
   }
 
-  if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY)/)) {
+  if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY|WRONG_INDEX_OR_AUTH_KEY)/)) {
     processError ('invalid authkey', data.type, res, callback);
     return;
   }
