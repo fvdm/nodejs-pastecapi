@@ -89,7 +89,7 @@ function talk (options, callback) {
   if (config.indexid) {
     options.path = options.path.replace (/^\/index/, '/indexes/' + config.indexid);
 
-    if (options.json && options.json.type === 'PING') {
+    if (options.json && options.json.type === 'PING' && config.endpoint === 'https://api.pastec.io') {
       callback (new Error ('endpoint does not allow ping'));
       return;
     }
