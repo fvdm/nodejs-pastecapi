@@ -179,6 +179,16 @@ dotest.add ('Error: request failed', function (test) {
   });
 });
 
+dotest.add ('Setup arguments', function (test) {
+  const tmp = app ('example.lan', 123);
+
+  test ()
+    .isExactly ('fail', 'config.endpoint', tmp.config.endpoint, 'example.lan')
+    .isNull ('fail', 'config.authkey', tmp.config.authkey)
+    .isExactly ('fail', 'config.timeout', tmp.config.timeout, 123)
+    .done ();
+});
+
 
 // Start the tests
 dotest.run ();
