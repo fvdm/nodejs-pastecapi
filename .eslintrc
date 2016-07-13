@@ -1,11 +1,11 @@
 {
-  "ecmaFeatures": {
-    "modules": true
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
 
   "env": {
-    "node": true,
-    "es6": true
+    "node": true
   },
 
   "rules": {
