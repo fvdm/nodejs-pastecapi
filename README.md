@@ -2,16 +2,21 @@ pastecapi
 =========
 
 Lightweight Node.js module for the Pastec image recognition API.
-Both the opensource and Hosted API are supported.
 
 [![npm](https://img.shields.io/npm/v/pastecapi.svg?maxAge=3600)](https://github.com/fvdm/nodejs-pastecapi/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-pastecapi.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-pastecapi)
 [![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-pastecapi.svg)](https://gemnasium.com/github.com/fvdm/nodejs-pastecapi#runtime-dependencies)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-pastecapi/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-pastecapi?branch=master)
 
+Only the Hosted API is supported, but you _may_ also be able to use it with
+the [Opensource API](https://github.com/Visu4link/pastec). However, since
+the Opensource API is not actively being maintained anymore support may
+eventually break.
+
+
 * [Node.js](https://nodejs.org)
 * [Pastec](http://pastec.io)
-* [API documentation](http://pastec.io/doc#api)
+* [API documentation](http://pastec.io/doc/api/)
 
 
 Example
@@ -19,7 +24,8 @@ Example
 
 ```js
 var pastec = require ('pastecapi') ({
-  endpoint: 'https://my-pastec-server:4212'
+  indexid: '12345',
+  authkey: 'abc123'
 });
 
 // Add image signature to index
@@ -48,21 +54,22 @@ The setup function can take either a config object with settings or arguments.
 
 setting  | type   | required | default                 | description
 :--------|:-------|:---------|:------------------------|:-------------------
-endpoint | string | no       | `http://localhost:4121` | API endpoint
+endpoint | string | no       | `https://api.pastec.io` | API endpoint
 indexid  | string | no       |                         | Hosted API Index ID
 authkey  | string | no       |                         | API auth key, from `--auth-key` flag or Hosted API
 timeout  | number | no       | `5000`                  | Wait timeout in ms
 
 
 ```js
-// Example 1 - All defaults
-var pastec = require ('pastecapi') ();
-
-// Example 2 - Using Hosted API (Pastec.io)
+// Example 1 - All defaults (api.pastec.io)
 var pastec = require ('pastecapi') ({
-  endpoint: 'https://api.pastec.io',
   indexid: 'your index id'
   authkey: 'your authentication key'
+});
+
+// Example 2 - Using opensource API
+var pastec = require ('pastecapi') ({
+  endpoint: 'http://localhost:4121',
 });
 ```
 
