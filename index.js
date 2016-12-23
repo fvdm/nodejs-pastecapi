@@ -51,19 +51,16 @@ function processResponse (err, res, callback) {
 
   if (err) {
     processError ('request failed', err, res, callback);
-    return;
-  }
+  } else {
+    try {
+      data = JSON.parse (data);
 
-  try {
-    data = JSON.parse (data);
-  } catch (e) {
-    processError ('request failed', e, res, callback);
-    return;
-  }
-
-  if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY|WRONG_INDEX_OR_AUTH_KEY)/)) {
-    processError ('invalid authkey', data.type, res, callback);
-    return;
+      if (data.type && data.type.match (/(AUTHENTIFICATION_ERROR|NO_AUTH_KEY|WRONG_INDEX_OR_AUTH_KEY)/)) {
+        processError ('invalid authkey', data.type, res, callback);
+      }
+    } catch (e) {
+      processError ('request failed', e, res, callback);
+    }
   }
 
   callback (null, data);
