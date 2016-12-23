@@ -63,7 +63,7 @@ timeout  | number | no       | `5000`                  | Wait timeout in ms
 ```js
 // Example 1 - All defaults (api.pastec.io)
 var pastec = require ('pastecapi') ({
-  indexid: 'your index id'
+  indexid: 'your index id',
   authkey: 'your authentication key'
 });
 
