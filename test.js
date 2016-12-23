@@ -14,13 +14,6 @@ var app = require ('./');
 var path = require ('path');
 var dir = path.dirname (module.filename);
 
-var opensource = {
-  endpoint: process.env.OPENSOURCE_ENDPOINT || 'http://localhost:4212',
-  indexid: process.env.OPENSOURCE_INDEXID || null,
-  authkey: process.env.OPENSOURCE_AUTHKEY || null,
-  timeout: process.env.OPENSOURCE_TIMEOUT || 5000
-};
-
 var hosted = {
   endpoint: process.env.HOSTED_ENDPOINT || 'https://api.pastec.io',
   indexid: process.env.HOSTED_INDEXID || null,
@@ -28,7 +21,7 @@ var hosted = {
   timeout: process.env.HOSTED_TIMEOUT || 5000
 };
 
-var pastec = app (opensource);
+var pastec = app (hosted);
 
 
 // Tests
@@ -49,164 +42,10 @@ dotest.add ('Module', function (test) {
 
 
 /**
- * Opensource API
- */
-
-dotest.add ('Opensource API - Method ping', function (test) {
-  pastec.ping (function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'PONG')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method writeIndex', function (test) {
-  pastec.writeIndex ('./sampleIndex.dat', function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_WRITTEN')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method clearIndex', function (test) {
-  pastec.clearIndex (function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_CLEARED')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method loadIndex', function (test) {
-  pastec.loadIndex ('./sampleIndex.dat', function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_LOADED')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method addImage - filename', function (test) {
-  pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method addImage - buffer', function (test) {
-  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
-    test (errFile);
-
-    pastec.addImage (file, 999999999999999, function (err, data) {
-      test (err)
-        .isObject ('fail', 'data', data)
-        .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
-        .done ();
-    });
-  });
-});
-
-dotest.add ('Opensource API - Method addImage - error', function (test) {
-  pastec.addImage ('', 999999999999999, function (err, data) {
-    test ()
-      .isError ('fail', 'err', err)
-      .info (err.message)
-      .isUndefined ('fail', 'data', data)
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method searchIndex - filename', function (test) {
-  pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
-      .done ();
-  });
-});
-
-
-dotest.add ('Opensource API - Method searchIndex - buffer', function (test) {
-  fs.readFile (path.join (dir, 'imageSample.jpg'), function (errFile, file) {
-    test (errFile);
-
-    pastec.searchIndex (file, function (err, data) {
-      test (err)
-        .isObject ('fail', 'data', data)
-        .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
-        .done ();
-    });
-  });
-});
-
-dotest.add ('Opensource API - Method searchIndex - error', function (test) {
-  pastec.searchIndex ('', function (err, data) {
-    test ()
-      .isError ('fail', 'err', err)
-      .info (err.message)
-      .isUndefined ('fail', 'data', data)
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Method deleteImage', function (test) {
-  pastec.deleteImage (999999999999999, function (err, data) {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_REMOVED')
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Error: invalid authkey', function (test) {
-  var tmp = app ({
-    endpoint: opensource.endpoint,
-    indexid: opensource.indexid,
-    authkey: '-',
-    timeout: opensource.timeout
-  });
-
-  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
-    test ()
-      .isError ('fail', 'err', err)
-      .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
-      .isExactly ('warn', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
-      .isUndefined ('fail', 'data', data)
-      .done ();
-  });
-});
-
-dotest.add ('Opensource API - Error: request failed', function (test) {
-  var tmp = app ({
-    endpoint: opensource.endpoint,
-    indexid: opensource.indexid,
-    authkey: opensource.authkey,
-    timeout: 1
-  });
-
-  tmp.writeIndex ('./sampleIndex.dat', function (err, data) {
-    test ()
-      .isError ('fail', 'err', err)
-      .isExactly ('fail', 'err.message', err && err.message, 'request failed')
-      .isError ('fail', 'err.error', err && err.error)
-      .isExactly ('fail', 'err.error.code', err && err.error && err.error.code, 'TIMEOUT')
-      .isUndefined ('fail', 'data', data)
-      .done ();
-  });
-});
-
-
-/**
  * Hosted API
  */
 
 dotest.add ('Hosted API - Method ping', function (test) {
-  pastec = app (hosted);
-
   pastec.ping (function (err, data) {
     test ()
       .isError ('fail', 'err', err)
