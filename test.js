@@ -59,7 +59,7 @@ dotest.add ('Hosted API - Method writeIndex', function (test) {
   pastec.writeIndex ('./sampleIndex.dat', function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_WRITTEN')
+      .isExactly ('fail', 'data.type', data && data.type, 'INDEX_WRITTEN')
       .done ();
   });
 });
@@ -68,7 +68,7 @@ dotest.add ('Hosted API - Method clearIndex', function (test) {
   pastec.clearIndex (function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_CLEARED')
+      .isExactly ('fail', 'data.type', data && data.type, 'INDEX_CLEARED')
       .done ();
   });
 });
@@ -77,7 +77,7 @@ dotest.add ('Hosted API - Method loadIndex', function (test) {
   pastec.loadIndex ('./sampleIndex.dat', function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'INDEX_LOADED')
+      .isExactly ('fail', 'data.type', data && data.type, 'INDEX_LOADED')
       .done ();
   });
 });
@@ -86,7 +86,7 @@ dotest.add ('Hosted API - Method addImage - filename', function (test) {
   pastec.addImage (path.join (dir, 'imageSample.jpg'), 999999999999999, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
+      .isExactly ('fail', 'data.type', data && data.type, 'IMAGE_ADDED')
       .done ();
   });
 });
@@ -98,7 +98,7 @@ dotest.add ('Hosted API - Method addImage - buffer', function (test) {
     pastec.addImage (file, 999999999999999, function (err, data) {
       test (err)
         .isObject ('fail', 'data', data)
-        .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_ADDED')
+        .isExactly ('fail', 'data.type', data && data.type, 'IMAGE_ADDED')
         .done ();
     });
   });
@@ -118,7 +118,7 @@ dotest.add ('Hosted API - Method searchIndex - filename', function (test) {
   pastec.searchIndex (path.join (dir, 'imageSample.jpg'), function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+      .isExactly ('fail', 'data.type', data && data.type, 'SEARCH_RESULTS')
       .done ();
   });
 });
@@ -131,7 +131,7 @@ dotest.add ('Hosted API - Method searchIndex - buffer', function (test) {
     pastec.searchIndex (file, function (err, data) {
       test (err)
         .isObject ('fail', 'data', data)
-        .isExactly ('warn', 'data.type', data && data.type, 'SEARCH_RESULTS')
+        .isExactly ('fail', 'data.type', data && data.type, 'SEARCH_RESULTS')
         .done ();
     });
   });
@@ -151,7 +151,7 @@ dotest.add ('Hosted API - Method deleteImage', function (test) {
   pastec.deleteImage (999999999999999, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
-      .isExactly ('warn', 'data.type', data && data.type, 'IMAGE_REMOVED')
+      .isExactly ('fail', 'data.type', data && data.type, 'IMAGE_REMOVED')
       .done ();
   });
 });
@@ -168,7 +168,7 @@ dotest.add ('Hosted API - Error: invalid authkey', function (test) {
     test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'invalid authkey')
-      .isExactly ('warn', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
+      .isExactly ('fail', 'err.error', err && err.error, 'AUTHENTIFICATION_ERROR')
       .isUndefined ('fail', 'data', data)
       .done ();
   });
