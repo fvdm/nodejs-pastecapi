@@ -11,7 +11,7 @@ var httpreq = require ('httpreq');
 var fs = require ('fs');
 
 var config = {
-  endpoint: 'http://localhost:4121',
+  endpoint: 'https://api.pastec.io',
   timeout: 5000
 };
 
